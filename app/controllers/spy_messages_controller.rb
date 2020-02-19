@@ -1,0 +1,2 @@
+class SpyMessagesController < ApplicationController
+end
