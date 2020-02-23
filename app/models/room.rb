@@ -16,7 +16,7 @@ class Room < ApplicationRecord
     game = game.sample(25) #randomizes the order of the array
     words = Word.all.sample(25).map{|word| word.word} #randomly takes 25 words from the word db
     turn = game.max_by {|i| game.count(i)} #finds most common element in array
-    self.update(turn: turn) #sets whos turn it is
+    self.update(turn: turn, start: turn) #sets whos turn it is
     25.times { self.cards.create(word: words.shift, team: game.shift, clicked: false)}
   end
 
@@ -25,7 +25,7 @@ class Room < ApplicationRecord
     game = game.sample(25) #randomizes the order of the array
     words = Word.all.sample(25).map{|word| word.word} #randomly takes 25 words from the word db
     turn = game.max_by {|i| game.count(i)} #finds most common element in array
-    self.update(turn: turn) #sets whos turn it is
+    self.update(turn: turn, start: turn) #sets whos turn it is
     self.cards.each do |card| #updates cards to new deck
       card.update(word: words.shift, team: game.shift, clicked: false)
     end

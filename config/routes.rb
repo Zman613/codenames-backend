@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   get '/join-room', to: 'rooms#join_room'
   patch '/click', to: 'rooms#click'
   patch '/new-game', to: 'rooms#new_game'
+  patch '/next-turn', to: 'rooms#next_turn'
 end
