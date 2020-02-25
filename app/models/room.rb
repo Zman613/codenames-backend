@@ -4,6 +4,7 @@ class Room < ApplicationRecord
   has_many :messages
   has_many :spy_messages
   has_secure_password
+  validates :name, uniqueness: { case_sensitive: false }
 
   @@game = { 
     'game1' => ['blue', 'blue', 'blue', 'blue', 'blue', 'blue', 'blue', 'blue', 'blue', 'red', 'red', 'red', 'red', 'red', 'red', 'red', 'red', 'assassin', 'innocent', 'innocent', 'innocent', 'innocent', 'innocent', 'innocent', 'innocent'],
