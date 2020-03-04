@@ -12,7 +12,10 @@ Rails.application.routes.draw do
   patch '/click', to: 'rooms#click'
   patch '/new-game', to: 'rooms#new_game'
   patch '/next-turn', to: 'rooms#next_turn'
+  patch '/game-over', to: 'rooms#game_over'
 
   post '/join-room', to: 'auth#login'
   get 'auto-login', to: 'auth#auto_login'
+
+  patch '/spymaster/:id', to: 'users#spymaster'
 end

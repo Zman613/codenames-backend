@@ -33,7 +33,13 @@ class RoomsController < ApplicationController
     
     if card.update(clicked: true)
       room = Room.find(room_params[:id])
-      if card.team == 'innocent'
+      if card.team == 'assassin'
+        if room.turn == 'blue'
+          room.update(turn: 'red win')
+        elsif room.turn == 'red'
+          room.update(turn: 'blue win')
+        end
+      elsif card.team != room[:turn]
         if room[:turn] == 'red'
           room.update(turn: 'blue')
         elsif room[:turn] == 'blue'
@@ -48,8 +54,12 @@ class RoomsController < ApplicationController
 
   def new_game
     room = Room.find(room_params[:id])
+    users = User.all.select{|user| user.room_id == room.id}
+    users.each{|user| user.update(team: nil)}
     room.new_game
     serialized_data = serializer(room)
+    UsersChannel.broadcast_to room, users
+    head :ok
     RoomsChannel.broadcast_to room, serialized_data
     head :ok
   end
@@ -60,6 +70,18 @@ class RoomsController < ApplicationController
       room.update(turn: 'blue')
     elsif room[:turn] == 'blue'
       room.update(turn: 'red')
+    end
+    serialized_data = serializer(room)
+    RoomsChannel.broadcast_to room, serialized_data
+    head :ok
+  end
+
+  def game_over
+    room = Room.find(room_params[:id])
+    if room.turn == 'red'
+      room.update(turn: 'red win')
+    elsif room.turn == 'blue'
+      room.update(turn: 'blue win')
     end
     serialized_data = serializer(room)
     RoomsChannel.broadcast_to room, serialized_data
