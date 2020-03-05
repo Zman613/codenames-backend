@@ -1,3 +1,4 @@
 class RoomSerializer < ActiveModel::Serializer
-  attributes :id, :name, :password_digest, :turn
+  attributes :id, :name, :turn, :start
+  has_many :cards
 end
