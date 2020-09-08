@@ -7,6 +7,8 @@ The teams compete to see who can make contact with all of their agents first. Sp
 
 Codenames: win or lose, it’s fun to figure out the clues.
 
+The frontend can be found [here](https://github.com/Zman613/codenames-frontend)
+
 ### Configuration
 Create, migrate and seed the database with rails db:setup.
 If you are playing on one computer and using localhost no configuration needed. If you want to open up your computer as a server (using Ngrok for example). Then you need to go to .config/environments/development.rb and comment out config.action_cable.allowed_request_origins = ['Your Host Name'] 
