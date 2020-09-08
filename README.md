@@ -8,8 +8,5 @@ The teams compete to see who can make contact with all of their agents first. Sp
 Codenames: win or lose, it’s fun to figure out the clues.
 
 ### Configuration
-1. rails db:create
-2. rails db:migrate
-3. rails d
-If you are playing on one computer and using localhost no configuration needed. If you want to open up your computer as a server (using Ngrok for example). Then you need to go to ./src/constants/index.js and change API_ROOT to the http of the host address and API_WS_ROOT to the ws of the host address (ws://*HOST_ADDRESS*/cable).
-
+Create, migrate and seed the database with rails db:setup.
+If you are playing on one computer and using localhost no configuration needed. If you want to open up your computer as a server (using Ngrok for example). Then you need to go to .config/environments/development.rb and comment out config.action_cable.allowed_request_origins = ['Your Host Name'] 
